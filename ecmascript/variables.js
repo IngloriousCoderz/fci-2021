@@ -1,19 +1,19 @@
 function doSomething() {
-    var i;
+  var i;
 
-    console.log('Hello "world"!');
+  console.log('Hello "world"!');
 
-    var a = 2;
-    console.log(a + "3");
-    console.log(a - "3");
+  var a = 2;
+  console.log(a + "3");
+  console.log(a - "3");
 
-    for (var i = 0; i < 3; i++) {
-        console.log(i);
-    }
+  for (var i = 0; i < 3; i++) {
+    console.log(i);
+  }
 
-    i
+  i;
 
-    // hoisting
+  // hoisting
 }
 
 let a = 2;
