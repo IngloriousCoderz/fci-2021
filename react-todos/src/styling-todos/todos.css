@@ -1,0 +1,18 @@
+/**
+CSS
+
+PROS:
+- evidenziazione sintassi
+- applicabili globalmente
+- regole globali (media queries)
+- non ridondati
+- riusabili
+
+CONS:
+- statici
+- non applicabili localmente
+*/
+
+.done {
+  text-decoration: line-through;
+}

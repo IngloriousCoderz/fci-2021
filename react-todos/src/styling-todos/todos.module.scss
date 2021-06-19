@@ -1,0 +1,19 @@
+/**
+CSS Module
+
+PROS:
+- evidenziazione sintassi
+- regole globali (media queries)
+- applicabili localmente
+- non ridondati
+
+CONS:
+- statici
+- non riusabili
+- non applicabili globalmente
+- non è possibile utilizzare selettori diversi dalle classi
+*/
+
+.done {
+  text-decoration: line-through;
+}

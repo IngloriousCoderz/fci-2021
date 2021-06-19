@@ -1,27 +1,41 @@
-// import styles from "./todos.styles";
-import "./todos.css";
+import { useState } from "react";
+// import classes from "./todos.module.scss";
+import Form from "./form";
+import List from "./list";
 
-function Todos() {
-  // event handler - function that handles events
-  const handleSubmit = (event) => {
-    event.preventDefault();
+function Todos({ who }) {
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", done: true },
+    { id: 2, text: "Look for a job", done: false },
+    { id: 3, text: "Forget everything" },
+  ]);
+
+  const addTodo = (text) => {
+    const maxId = todos.length ? todos[todos.length - 1].id : 0;
+    setTodos([...todos, { id: maxId + 1, text }]);
   };
 
-  const style = {
-    color: Math.random() > 0.5 ? "red" : "blue",
+  const toggleDone = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
+    );
+  };
+
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input autoFocus placeholder="What next?" />
-        <button>Submit</button>
-      </form>
-      <ul>
-        <li className="done">Learn React</li>
-        <li style={style}>Look for a job</li>
-        <li>Forget everything</li>
-      </ul>
+      <h1>{who}'s Todos</h1>
+      <Form onSubmit={addTodo} />
+      <List
+        todos={todos}
+        onToggleClick={toggleDone}
+        onRemoveClick={removeTodo}
+      />
     </>
   );
 }
