@@ -1,6 +1,16 @@
 import axios from "axios";
 
-const http = axios.create({ baseURL: "http://localhost:3000/todos" });
+/*
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(body),
+})
+*/
+
+const http = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 export async function read() {
   const { data } = await http.get("");
