@@ -1,40 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TodosComponent from "./todos";
 
-import * as api from "./api";
-
 function Todos({ who }) {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", done: true },
+    { id: 2, text: "Look for a job", done: false },
+    { id: 3, text: "Forget everything" },
+  ]);
 
-  // useEffect(() => {}) // scatta a ogni render: didMount+didUpdate
-  // useEffect(() => {}, []) // scatta al primo render: didMount
-  // useEffect(() => {}, [who]) // scatta ogni volta che le deps cambiano
-  // useEffect(() => {
-  //   return () => {}; // scatta prima di distruggersi: willUnmount
-  // }, []);
-  useEffect(() => {
-    fetchTodos();
-  }, []);
-
-  const fetchTodos = async () => {
-    const todos = await api.read();
-    setTodos(todos);
+  const addTodo = (text) => {
+    const maxId = todos.length ? todos[todos.length - 1].id : 0;
+    setTodos([...todos, { id: maxId + 1, text }]);
   };
 
-  const addTodo = async (text) => {
-    await api.create({ text });
-    fetchTodos();
+  const toggleDone = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo
+      )
+    );
   };
 
-  const toggleDone = async (id) => {
-    const todo = todos.find((todo) => todo.id === id);
-    await api.update(id, { done: !todo.done });
-    fetchTodos();
-  };
-
-  const removeTodo = async (id) => {
-    await api.remove(id);
-    fetchTodos();
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
