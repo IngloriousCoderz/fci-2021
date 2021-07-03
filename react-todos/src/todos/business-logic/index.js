@@ -1,34 +1,44 @@
 import { combineReducers, createSelector } from "@reduxjs/toolkit";
 
-import { SET_TEXT, ADD_TODO, TOGGLE_DONE, REMOVE_TODO } from "./action-types";
+import * as api from "../api";
 
+import { SET_TEXT, SET_TODOS } from "./action-types";
 import text from "./text";
 import todos from "./todos";
 
 // action creators
-export const setText = (text) => ({ type: SET_TEXT, payload: text });
-export const addTodo = (text) => ({ type: ADD_TODO, payload: text });
-export const toggleDone = (id) => ({ type: TOGGLE_DONE, payload: id });
-export const removeTodo = (id) => ({ type: REMOVE_TODO, payload: id });
 
-// const combineReducers =
-//   (reducers) =>
-//   (state = {}, action) => {
-//     const keys = Object.keys(reducers);
-//     return keys.reduce((acc, key) => {
-//       acc[key] = reducers[key](state[key], action);
-//       return acc;
-//     }, {});
-//   };
+export const setText = (text) => ({ type: SET_TEXT, payload: text });
+export const setTodos = (todos) => ({ type: SET_TODOS, payload: todos });
+
+// thunks
+
+export const fetchTodos = () => async (dispatch) => {
+  const todos = await api.read();
+  dispatch(setTodos(todos));
+};
+
+export const addTodo = (text) => async (dispatch) => {
+  await api.create({ text });
+  dispatch(setText(""));
+  dispatch(fetchTodos());
+};
+
+export const toggleDone = (id) => async (dispatch, getState) => {
+  const todos = selectTodos(getState());
+  const todo = todos.find((todo) => todo.id === id);
+  await api.update(id, { done: !todo.done });
+  dispatch(fetchTodos());
+};
+
+export const removeTodo = (id) => async (dispatch) => {
+  await api.remove(id);
+  dispatch(fetchTodos());
+};
+
+// reducer
 
 export default combineReducers({ text, todos });
-
-// export default function rootReducer(state = {}, action) {
-//   return {
-//     text: text(state.text, action),
-//     todos: todos(state.todos, action),
-//   };
-// }
 
 // selectors
 
