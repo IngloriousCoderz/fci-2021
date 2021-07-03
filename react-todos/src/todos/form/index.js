@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, selectText, setText } from "../business-logic";
 import FormComponent from "./form";
 
 // container component
 
-function Form({ onSubmit }) {
-  const [text, setText] = useState("");
+function Form() {
+  const text = useSelector(selectText);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    setText(event.target.value);
+    dispatch(setText(event.target.value));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(text);
-    setText("");
+    dispatch(addTodo(text));
   };
 
   return (
