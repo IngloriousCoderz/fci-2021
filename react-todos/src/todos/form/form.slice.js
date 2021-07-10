@@ -11,7 +11,7 @@ const formSlice = createSlice({
     },
   },
   extraReducers: {
-    [addTodo](state) {
+    [addTodo]() {
       return "";
     },
   },

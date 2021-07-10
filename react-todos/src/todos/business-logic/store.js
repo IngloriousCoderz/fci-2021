@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from ".";
+import form from "../form/form.slice";
+import list from "../list/list.slice";
 
-const store = configureStore({ reducer: rootReducer });
+const store = configureStore({ reducer: { form, list } });
 
 export default store;

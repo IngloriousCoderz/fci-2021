@@ -1,9 +1,4 @@
-import { combineReducers, createSelector } from "@reduxjs/toolkit";
-
-import form from "../form/form.slice";
-import list from "../list/list.slice";
-
-export default combineReducers({ form, list });
+import { createSelector } from "@reduxjs/toolkit";
 
 // selectors
 

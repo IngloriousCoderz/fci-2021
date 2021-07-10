@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectText } from "../business-logic";
+import { selectText } from "../business-logic/selectors";
 import { addTodo } from "../business-logic/actions";
 import { setText } from "./form.slice";
 

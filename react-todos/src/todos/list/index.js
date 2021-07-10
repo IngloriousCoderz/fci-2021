@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectTodos } from "../business-logic";
+import { selectTodos } from "../business-logic/selectors";
 import { toggleDone, removeTodo } from "./list.slice";
 import ListComponent from "./list";
 
