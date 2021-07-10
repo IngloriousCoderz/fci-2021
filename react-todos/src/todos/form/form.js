@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 // presentational component
 
 function Form({ text, onChange, onSubmit }) {
@@ -13,5 +15,15 @@ function Form({ text, onChange, onSubmit }) {
     </form>
   );
 }
+
+Form.propTypes = {
+  text: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+};
+
+Form.defaultProps = {
+  text: "",
+};
 
 export default Form;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import classes from "./list.module.scss";
 
 function List({ todos, onToggleClick, onRemoveClick }) {
@@ -12,5 +14,21 @@ function List({ todos, onToggleClick, onRemoveClick }) {
     </ul>
   );
 }
+
+List.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      done: PropTypes.bool,
+    })
+  ).isRequired,
+  onToggleClick: PropTypes.func,
+  onRemoveClick: PropTypes.func,
+};
+
+List.defaultProps = {
+  todos: [],
+};
 
 export default List;
