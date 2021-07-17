@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./todos";
+import App from "./use-reducer-todos";
 
 // jsx - sugar syntax per js puro
 

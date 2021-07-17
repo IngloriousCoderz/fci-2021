@@ -2,7 +2,7 @@
 // import "./todos.css";
 import classes from "./todos.module.scss";
 
-console.log(classes);
+// console.log(classes);
 
 function Todos() {
   // event handler - function that handles events
